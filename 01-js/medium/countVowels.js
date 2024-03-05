@@ -7,6 +7,15 @@
 
 function countVowels(str) {
     // Your code here
+    let countOfVowels=0
+    for(let i=0;i<str.length;i++)
+    {
+      if(str.charCodeAt(i)==65 || str.charCodeAt(i)==97 || str.charCodeAt(i)==69 || str.charCodeAt(i)==101 || str.charCodeAt(i)==73 || str.charCodeAt(i)==105 || str.charCodeAt(i)==79 || str.charCodeAt(i)==111 || str.charCodeAt(i)==85 || str.charCodeAt(i)==117)
+      {
+        countOfVowels+=1
+      }
+    }
+    return countOfVowels
 }
 
 module.exports = countVowels;

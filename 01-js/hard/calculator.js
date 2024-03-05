@@ -16,6 +16,69 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor() {
+    this.result = 0;
+  }
+  add(n) {
+    this.result += n;
+  }
+  subtract(n) {
+    this.result -= n;
+  }
+  multiply(n) {
+    this.result = (this.result) * (n);
+  }
+  divide(n) {
+    if (n != 0) {
+      this.result = (this.result) / (n);
+    }
+    else {
+      throw new Error("Error");
+    }
+  }
+  clear() {
+    this.result = 0;
+  }
+  getResult() {
+    return this.result;
+  }
+  calculate(s) {
+    let count = 0, count1 = 0, inputString = s;
+    const regex = /[+\-*/().]|\d+\.\d+|\d+/g;
+    const operations = inputString.match(regex);
+    const unwantedCharacters = inputString.replace(regex, '').replace(/\s/g, '');
+    for (let i = 0; i < operations.length; i++) {
+      if (i != operations.length - 1) {
+        if (operations[i] == '/' && operations[i + 1] == '0') {
+          throw new Error("Error")
+        }
+      }
+      if (operations[i] == '(') {
+        if (count >= 0) {
+          count += 1;
+        }
+        else {
+          throw new Error("Error")
+        }
+      }
+      else if (operations[i] == ')') {
+        count -= 1;
+      }
+    }
+    if ((unwantedCharacters.length > 0) || (count != 0)) {
+      throw new Error("Error");
+    }
+    else {
+      try {
+        this.result = eval(s);
+      }
+      catch (error) {
+        console.log("Error");
+      }
+    }
+
+  }
+}
 
 module.exports = Calculator;
