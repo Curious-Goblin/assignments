@@ -6,17 +6,56 @@
     let globalId = 1;
     let todoState = [];
     let oldTodoState = [];
+    let flag = 0;
+    let flag1 = 0;
 
-    function addTodoToDom() {
-      
+    function addTodoToDom(addedTodos) {
+      const mainDiv = document.getElementById("todos")
+      for (let i = 0; i < addedTodos.length; i++) {
+        const parentDiv = document.createElement("div")
+        const titleDiv = document.createElement("div")
+        const descriptionDiv = document.createElement("div")
+        const button = document.createElement("button")
+        const titleText = document.createTextNode(addedTodos[i].title)
+        const descriptionText = document.createTextNode(addedTodos[i].description)
+        const buttonText = document.createTextNode("Mark as done")
+        titleDiv.appendChild(titleText)
+        // descriptionDiv.appendChild(descriptionText)
+        descriptionDiv.appendChild(descriptionText)
+        button.appendChild(buttonText)
+        parentDiv.appendChild(titleDiv)
+        parentDiv.appendChild(descriptionDiv)
+        parentDiv.appendChild(button)
+        button.setAttribute("onclick", `markAsDone(${addedTodos[i].id})`)
+        parentDiv.setAttribute("id", addedTodos[i].id)
+        mainDiv.appendChild(parentDiv)
+        const br = document.createElement("br")
+        const cbr = document.createElement("br")
+        parentDiv.appendChild(br)
+        parentDiv.appendChild(cbr)
+      }
+
     }
 
-    function removeTodoFromDom(todo) {
-      
+    function removeTodoFromDom(removedTodos) {
+      for (let i = 0; i < removedTodos.length; i++) {
+        const parentDiv = document.getElementById(removedTodos[i].id)
+        parentDiv.remove()
+      }
     }
 
-    function updateTodoInDom(oldTodo, newTodo) {
-        
+    function updateTodoInDom(updatedTodos) {
+      for (let i = 0; i < updatedTodos.length; i++) {
+        const parentDiv = document.getElementById(updatedTodos[i].id)
+        parentDiv.children[0].innerHTML = updatedTodos[i].title
+        parentDiv.children[1].innerHTML = updatedTodos[i].description
+      }
+    }
+
+    function markAsDone(todoId) {
+      const parentDiv = document.getElementById(todoId)
+      todoState
+      parentDiv.remove()
     }
 
     function updateState(newTodos) {
@@ -31,7 +70,74 @@
       // calculate these 3 arrays
       // call addTodo, removeTodo, updateTodo functions on each of the
       // elements
-      oldTodoState = newTodos;
+
+      for (let i = 0; i < oldTodoState.length; i++) {
+        flag = 0;
+        for (let j = 0; j < newTodos.length; j++) {
+          if (oldTodoState[i].id == newTodos[j].id) {
+            flag = 1;
+            if (oldTodoState[i].title != newTodos[j].title) {
+              updated.push(newTodos[j])
+            }
+          }
+        }
+        if (flag == 0) {
+          deleted.push(oldTodoState[i])
+        }
+      }
+
+      for (let j = 0; j < newTodos.length; j++) {
+        flag1 = 0
+        for (let i = 0; i < oldTodoState.length; i++) {
+          if (newTodos[j].id == oldTodoState[i].id) {
+            flag1 = 1;
+          }
+        }
+        if (flag1 == 0) {
+          added.push(newTodos[j])
+        }
+      }
+      // const idCheck = (id) => {newTodos.some(obj => obj.id == id)}
+      // const titleCheck=(title)=>{newTodos.some(obj=>obj.title==title)}
+      // for (let i = 0; i < oldTodoState.length; i++) {
+      //   if (idCheck(oldTodoState[i].id))
+      //   {
+      //     if(titleCheck(oldTodoState[i].title))
+      //   }
+      // }
+
+      if (added.length != 0) {
+        addTodoToDom(added)
+      }
+      if (deleted.length != 0) {
+        removeTodoFromDom(deleted)
+      }
+      if (updated.length != 0) {
+        updateTodoInDom(updated)
+      }
+
+      oldTodoState = [...todoState];
+    }
+
+    function changeState() {
+      todoState = [
+        {
+          title: "sourabh",
+          description: "this is hard coded",
+          id: 1
+        },
+        {
+          title: "sourabh1",
+          description: "slfjsdlfjsdl",
+          id: 2
+        },
+        {
+          title: "sourabh2",
+          description: "slsdfldlllfjall",
+          id: 3
+        }
+      ]
+      updateState(todoState)
     }
 
     function addTodo() {
@@ -52,6 +158,9 @@
   <input type="text" id="description" placeholder="Todo description"></input> <br /><br />
   <button onclick="addTodo()">Add todo</button>
   <br /> <br />
+  <button onclick="changeState()">Change State</button>
+  <br /> <br />
+
 
   <div id="todos">
 
