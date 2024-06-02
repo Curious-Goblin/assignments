@@ -1,0 +1,77 @@
+#parentdiv {
+  height: 100vh;
+  width: 100%;
+  background-color: #d38282;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mainDiv {
+  position: relative;
+  height: 70%;
+  width: 25%;
+  border-radius: 10px;
+  background-color: rgb(242, 242, 252);
+}
+
+#coverImage {
+  position: absolute;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 30%;
+  width: 100%;
+  display: block;
+  object-fit: fill;
+}
+
+#profileImage {
+  position: absolute;
+  border-radius: 50%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  object-position: top;
+}
+
+#username{
+  position:absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#userStats {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+#followers,
+#likes,
+#photos {
+  margin: 0 10px;
+}
+
+#line{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 5%;
+  top: 55%;
+  /* margin: 2%; */
+  width: 90%;
+  height: 2px;
+  background-color: rgb(126, 119, 119);
+}
+
+.property{
+  font-weight: 500;
+
+}

@@ -18,7 +18,7 @@ Actions: Fetch a list of all blog posts. Can be public or user-specific based on
 
  - POST /posts - Create a new blog post.
 Inputs: title, body
-Actions: Create a new blog post associated with the authenticated user. Require authentication.
+Actions: Create a new blog post associated with the authenticated user. Require authentication.-
 
  - GET /posts/:id - Retrieve a single blog post by ID.
 Actions: Fetch details of a specific blog post. Can be public or have additional details/edit capabilities for the owner.

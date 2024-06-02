@@ -8,11 +8,6 @@ export function Card(props={}){
         <h1 id='h1'>{props.username}</h1>
         <h3 className='h3'>{props.description}</h3>
         <h2 id='h2'>Interests</h2>
-        {/* {props.interests.map(function(interest){
-           return <div key={props.username}>
-           <h3 className='h3'>{interest}</h3>
-           </div>
-        })} */}
         <h3 className='h3'>{props.interests[0]}</h3>
         <h3 className='h3'>{props.interests[1]}</h3>
         <h3 className='h3'>{props.interests[2]}</h3>
@@ -22,7 +17,6 @@ export function Card(props={}){
     </div>
 }
 
-//  Define propTypes
 Card.propTypes = {
     username: PropTypes.string.isRequired, 
     description:PropTypes.string.isRequired,

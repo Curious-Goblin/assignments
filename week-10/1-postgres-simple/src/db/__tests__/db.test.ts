@@ -2,6 +2,7 @@ import { client } from '../..';
 import { createUser, getUser } from '../user';
 import { createTables, dropTables } from '../setup';
 import { createTodo, updateTodo, getTodos } from '../todo';
+import { any } from 'zod';
 
 beforeAll(async () => {
     await client.connect();
@@ -68,10 +69,10 @@ describe('Todo Operations', () => {
   
     test('getTodos retrieves all todos for a user', async () => {
       // Assuming there are already todos created in previous tests
-      const todos = await getTodos(userId);
+      const todos:any = await getTodos(userId);
   
       expect(todos.length).toBeGreaterThan(0);
-      todos.forEach(todo => {
+      todos.forEach((todo:any) => {
         expect(todo).toHaveProperty('id');
         expect(todo.user_id).toEqual(userId);
       });
